@@ -9,7 +9,8 @@ class Node:
         return self.data
   
     def getNext(self):
-        return self.next
+        return self.next # test 
+
     
     def getPrev(self):
         return self.prev
