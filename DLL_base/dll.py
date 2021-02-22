@@ -5,12 +5,11 @@ class Node:
         self.next = None
         self.prev = None
         
-    def getData(self):
+    def get_value(self): # tes
         return self.data
-  
-    def getNext(self):
-        return self.next # test 
 
+    def getNext(self):
+        return self.next
     
     def getPrev(self):
         return self.prev
@@ -18,10 +17,10 @@ class Node:
     def setData(self,newdata):
         self.data=newdata
         
-    def setNext(self,newnext):
+    def move_to_next(self,newnext):
         self.next=newnext
     
-    def setPrev(self,newprev):
+    def move_to_prev(self,newprev):
         self.prev=newprev
     
 class LinkedList:
@@ -60,14 +59,19 @@ class LinkedList:
             cur_node=cur_node.next   
         return counter  
     
-    def display(self):
-        V=[self.head.data]
-        cur_node=self.head
-        while cur_node.next!=None:
-            cur_node=cur_node.next
-            V.append(cur_node.data)
-        return V  
     
+    def __str__(self):
+        result = "["
+        node = self.head
+        if node != None:
+            result += str(node.data)
+            node = node.next
+            while node:
+                result += ", " + str(node.data)
+                node = node.next
+        result += "]"
+        return result    
+        
     def insertAfter(self,p,v):
         v.prev=p
         v.next=p.next
@@ -88,7 +92,22 @@ class LinkedList:
         (p.next).prev=p.prev
         return t
 
+
 if __name__ == "__main__":
     #create tests here if you want
-    pass
-    
+    A=Node(1)
+    B=Node(2)
+    C=Node(3)
+    D=Node(4)
+    E=Node(5)
+    A.move_to_next(B)
+    B.move_to_prev(A)
+    B.move_to_next(C)
+    C.move_to_prev(B)
+    L=LinkedList(A)
+    L.insertAfter(B,D)
+    L.insertBefore(B,E)
+    L.remove(B)
+    print(L)
+    print(A.get_value())
+        
