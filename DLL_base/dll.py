@@ -33,11 +33,11 @@ class LinkedList:
                 self.tail=cur_node
 
   
-    def first(self):
+    def get_first_node(self):
         return self.head
     
-    def last(self):
-        return self.tail    
+    def get_last_node(self):
+        return self.tail
         
     def before(self,p):
         return p.prev
@@ -111,4 +111,6 @@ if __name__ == "__main__":
     print(L)
     print(A.get_value())
     print(len(L))
+    print(L.get_first_node())
+    print(L.get_last_node())
         
