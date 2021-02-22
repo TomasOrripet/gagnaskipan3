@@ -14,29 +14,37 @@ class DLL:
 
     def insert(self, data):
         new_node = Node(data)
-        if self.head == None:
+        if self.pos == 0:
+            if self.head == None:
+                self.head = new_node
+                return
+            elif self.head.next == None:
+                self.head.next = self.head
+                self.tail = self.head
+                self.tail.next = None
+                self.head = new_node
+                new_node.next = self.tail
+                return
+        
+            new_node.next = self.head
             self.head = new_node
-            return
-        elif self.head.next == None:
-            self.head.next = self.head
-            self.tail = self.head
-            self.tail.next = None
+
+        elif (self.pos == 1):
+            new_node.next = self.head
+            self.head.prev = new_node
             self.head = new_node
-            new_node.next = self.tail
-            return
-    
-
-        new_node.next = self.head
-        self.head = new_node
-
-        #data.next=self.pos
-        #data.prev=self.pos.prev
-        #(self.pos.prev).next=data
-        #self.pos.prev=data
+        else:    
+            temp = self.head
+            for i in range(1, self.pos):
+                if(temp != None):
+                    temp = temp.next   
+            if temp != None:
+                new_node.next = temp.next
+                new_node.prev = temp
+                temp.next = new_node  
+                if (new_node.next != None):
+                    new_node.next.prev = new_node        
         return 
-
-
-
 
 
         
@@ -54,10 +62,11 @@ class DLL:
             value = self.head.next
         else:
             temphead = self.head
-            for i in range(1, self.pos):
+            for i in range(0, self.pos):
                 if temphead != None:
                     temphead = temphead.next
-            value = temphead  
+            value = temphead
+            
         if value == None:
             return None
         else:     
@@ -123,4 +132,27 @@ if __name__ == "__main__":
     dll.insert("C")
     print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
     dll.insert("D")
-    
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("E")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.move_to_next()
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.move_to_next()
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("1")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("2")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.move_to_next()
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("3")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("4")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.move_to_prev()
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("VALUE")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.move_to_pos(8)
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.remove()

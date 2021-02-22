@@ -1,0 +1,20 @@
+
+
+TESTING THE BASIC STUFF
+
+   -   current value: None   -   size: 0
+A    -   current value: A   -   size: 1
+B A    -   current value: B   -   size: 2
+C B A    -   current value: C   -   size: 3
+D C B A    -   current value: D   -   size: 4
+E D C B A    -   current value: E   -   size: 5
+E D C B A    -   current value: D   -   size: 5
+E D C B A    -   current value: D   -   size: 5
+E 1 D C B A    -   current value: 1   -   size: 6
+E 2 1 D C B A    -   current value: 2   -   size: 7
+E 2 1 D C B A    -   current value: 1   -   size: 7
+E 2 3 1 D C B A    -   current value: 3   -   size: 8
+E 2 4 3 1 D C B A    -   current value: 4   -   size: 9
+E 2 4 3 1 D C B A    -   current value: 2   -   size: 9
+E VALUE 2 4 3 1 D C B A    -   current value: VALUE   -   size: 10
+B A    -   current value: A   -   size: 2
