@@ -6,7 +6,7 @@ class Node:
         self.prev = None
         
     def getData(self):
-        return self.data #test1
+        return self.data
   
     def getNext(self):
         return self.next
