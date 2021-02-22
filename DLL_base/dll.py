@@ -51,7 +51,7 @@ class LinkedList:
         else:
             return False
     
-    def size(self):
+    def __len__(self):
         cur_node=self.head
         counter=1
         while cur_node.next !=None:
@@ -110,4 +110,5 @@ if __name__ == "__main__":
     L.remove(B)
     print(L)
     print(A.get_value())
+    print(len(L))
         
