@@ -1,116 +1,126 @@
 
 class Node:
-    def __init__(self, data=None):
+    def __init__(self, data = None, prev = None, next = None):
         self.data = data
-        self.next = None
-        self.prev = None
-        
-    def get_value(self): # tes
-        return self.data
+        self.prev = prev
+        self.next = next
 
-    def getNext(self):
-        return self.next
-    
-    def getPrev(self):
-        return self.prev
-    
-    def setData(self,newdata):
-        self.data=newdata
-        
-    def move_to_next(self,newnext):
-        self.next=newnext
-    
-    def move_to_prev(self,newprev):
-        self.prev=newprev
-    
-class LinkedList:
-    def __init__(self,node):
-        self.head=node
-        cur_node=self.head
-        while cur_node.next!=None:
-            cur_node=cur_node.next
-            if cur_node.next==None:
-                self.tail=cur_node
+class DLL:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.pos = 0
+        return
 
-  
+    def insert(self, data):
+        new_node = Node(data)
+        if self.head == None:
+            self.head = new_node
+            return
+        elif self.head.next == None:
+            self.head.next = self.head
+            self.tail = self.head
+            self.tail.next = None
+            self.head = new_node
+            new_node.next = self.tail
+            return
+    
+
+        new_node.next = self.head
+        self.head = new_node
+
+        #data.next=self.pos
+        #data.prev=self.pos.prev
+        #(self.pos.prev).next=data
+        #self.pos.prev=data
+        return 
+
+
+
+
+
+        
+
+    def remove(self):
+        t= self.head.data
+        (self.head.prev).next=self.head.next
+        (self.head.next).prev=self.head.prev
+        return t
+
+    def get_value(self):
+        if self.pos == 0:
+            value = self.head
+        elif self.pos == 1:
+            value = self.head.next
+        else:
+            temphead = self.head
+            for i in range(1, self.pos):
+                if temphead != None:
+                    temphead = temphead.next
+            value = temphead  
+        if value == None:
+            return None
+        else:     
+            return value.data
+
+    def move_to_next(self):
+        self.pos += 1
+        return
+
+    def move_to_prev(self):
+        self.pos -= 1
+        
+        return
+
+    def move_to_pos(self, pos):
+        for i in range(0,pos):
+            self.head = self.head.next
+        node = self.head.data
+        return node
+
+    def clear(self):
+        pass
+
     def get_first_node(self):
         return self.head
-    
+
     def get_last_node(self):
-        return self.tail
-        
-    def before(self,p):
-        return p.prev
-        
-    def after(self,p):
-        return p.next  
-        
-    def isEmpty(self):
-        if self.head==None:
-            return True
-        else:
-            return False
-    
+        pass
+
+    def partition(self, low, high):
+        pass
+
+    def sort(self):
+        pass
+
     def __len__(self):
         cur_node=self.head
         counter=1
-        while cur_node.next !=None:
-            counter+=1
-            cur_node=cur_node.next   
-        return counter  
-    
-    
-    def __str__(self):
-        result = "["
-        node = self.head
-        if node != None:
-            result += str(node.data)
-            node = node.next
-            while node:
-                result += ", " + str(node.data)
-                node = node.next
-        result += "]"
-        return result    
-        
-    def insertAfter(self,p,v):
-        v.prev=p
-        v.next=p.next
-        (p.next).prev=v
-        p.next=v
-        return v
-    
-    def insertBefore(self,p,v):
-        v.next=p
-        v.prev=p.prev
-        (p.prev).next=v
-        p.prev=v
-        return v
-        
-    def remove(self,p):
-        t=p.data
-        (p.prev).next=p.next
-        (p.next).prev=p.prev
-        return t
+        if cur_node == None:
+            return 0
+        else:
+            while cur_node.next !=None:
+                counter+=1
+                cur_node=cur_node.next   
+            return counter
 
+    def __str__(self):
+        string = ""
+        node = self.head
+        while node != None:
+            string += str(node.data) + " "
+            node = node.next
+        return string
 
 if __name__ == "__main__":
     #create tests here if you want
-    A=Node(1)
-    B=Node(2)
-    C=Node(3)
-    D=Node(4)
-    E=Node(5)
-    A.move_to_next(B)
-    B.move_to_prev(A)
-    B.move_to_next(C)
-    C.move_to_prev(B)
-    L=LinkedList(A)
-    L.insertAfter(B,D)
-    L.insertBefore(B,E)
-    L.remove(B)
-    print(L)
-    print(A.get_value())
-    print(len(L))
-    print(L.get_first_node())
-    print(L.get_last_node())
-        
+    dll = DLL()
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("A")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("B")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("C")
+    print(str(dll) + "   -   current value: " + str(dll.get_value()) + "   -   size: " + str(len(dll)))
+    dll.insert("D")
+    
